@@ -3,6 +3,13 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { getPosts } from '@/getPosts';
 
+type Data = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}[];
+
 export default function Posts() {
   // const { data, error, isLoading } = useQuery({
   //   queryKey: ['posts'],
@@ -12,7 +19,7 @@ export default function Posts() {
   // if (isLoading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error.message}</div>;
 
-  const { data } = useSuspenseQuery({
+  const { data }: { data: Data } = useSuspenseQuery({
     queryKey: ['posts'],
     queryFn: getPosts,
   });
@@ -21,8 +28,8 @@ export default function Posts() {
     <div>
       <h1>Posts</h1>
       <ul>
-        {data.map((post: any) => (
-          <li key={post.id}>{post.title}</li>
+        {data.map(({ id, title }) => (
+          <li key={id}>{title}</li>
         ))}
       </ul>
     </div>

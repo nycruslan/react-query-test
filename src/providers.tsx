@@ -17,6 +17,7 @@ function makeQueryClient() {
         staleTime: 60 * 1000,
         refetchOnMount: false, // Prevent refetching on component mount
         refetchOnWindowFocus: false, // Disable refetching on window focus
+        gcTime: 2 * 1000, // Garbage collection time set to 2 seconds
       },
     },
   });
